@@ -26,7 +26,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mItemList = itemList;
     }
 
-    //modified creating viewholder, so it creates appropriate holder for a given viewType
+    /**
+     * Based on viewType, it will return Header or Item for RecycleView
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -40,28 +45,45 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         throw new RuntimeException("There is no type that matches the type " + viewType + " + make sure your using types    correctly");
     }
 
-    //modifed ViewHolder binding so it binds a correct View for the Adapter
+    /**
+     * Binds a correct View for the Adapter
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (!isPositionHeader(position)) {
             RecyclerItemViewHolder holder = (RecyclerItemViewHolder) viewHolder;
-            String itemText = mItemList.get(position - 1); // we are taking header in to account so all of our items are correctly positioned
+            // we are taking header in to account so all of our items are correctly positioned
+            String itemText = mItemList.get(position - 1);
             holder.setItemText(itemText);
         }
     }
 
-    //our old getItemCount()
+    /**
+     * Get total item count
+     * @return
+     */
     public int getBasicItemCount() {
         return mItemList == null ? 0 : mItemList.size();
     }
 
     //our new getItemCount() that includes header View
+
+    /**
+     * Get total of item count and header
+     * @return
+     */
     @Override
     public int getItemCount() {
         return getBasicItemCount() + 1; // header
     }
 
-    //added a method that returns viewType for a given position
+    /**
+     * For very first posotion, return TypeHeader, and for rest return TypeItem.
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         if (isPositionHeader(position)) {
@@ -70,7 +92,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return TYPE_ITEM;
     }
 
-    //added a method to check if given position is a header
+    /**
+     * Checks if given position is a header
+     * @param position
+     * @return
+     */
     private boolean isPositionHeader(int position) {
         return position == 0;
     }

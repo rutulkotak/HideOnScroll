@@ -18,7 +18,6 @@ import com.rk.hideonscroll.listener.HidingScrollListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar mToolbar;
@@ -55,10 +54,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Initialize UI
+     */
     private void initUI() {
         mFabButton = (ImageButton) findViewById(R.id.fabButton);
     }
 
+    /**
+     * Initialize ToolBar
+     */
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -66,6 +71,9 @@ public class MainActivity extends ActionBarActivity {
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
     }
 
+    /**
+     * Initialize RecyclerView
+     */
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,6 +92,10 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    /**
+     * Sample data
+     * @return
+     */
     private List<String> createItemList() {
         List<String> itemList = new ArrayList<>();
         for(int i=0;i<20;i++) {
@@ -92,6 +104,9 @@ public class MainActivity extends ActionBarActivity {
         return itemList;
     }
 
+    /**
+     * Hide toolbar and image button
+     */
     private void hideViews() {
         mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
 
@@ -100,6 +115,9 @@ public class MainActivity extends ActionBarActivity {
         mFabButton.animate().translationY(mFabButton.getHeight()+fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
     }
 
+    /**
+     * Show toolbar and image button
+     */
     private void showViews() {
         mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
         mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
