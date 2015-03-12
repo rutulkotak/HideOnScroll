@@ -1,4 +1,4 @@
-Bluetooth & BLE
+Material Design Demo
 ===============
 
 HideOnScroll
